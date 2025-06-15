@@ -1,0 +1,4 @@
+<!--pages/basicKnowledge/basicKnowledge.wxml-->
+<view class="container">
+  <text>基础知识页面（待完善）</text>
+</view>

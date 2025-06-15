@@ -1,0 +1,5 @@
+<!--pages/index/index.wxml-->
+<view class="container">
+  <text class="description">欢迎使用我们的测试小程序。点击下方按钮开始答题。</text>
+  <button class="start-btn" bindtap="startTest">开始答题</button>
+</view>

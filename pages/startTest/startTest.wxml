@@ -1,0 +1,13 @@
+<!--pages/startTest/startTest.wxml-->
+<view class="container">
+  <view wx:if="{{!testCompleted}}">
+    <text class="question">{{questions[currentQuestionIndex].question}}</text>
+    <view class="options">
+      <button wx:for="{{[1,2,3,4,5]}}" wx:key="*this" data-answer="{{item}}" bindtap="checkAnswer">{{item}}</button>
+    </view>
+  </view>
+  <view wx:else>
+    <text>测试完成！</text>
+    <button bindtap="viewScore">查看得分</button>
+  </view>
+</view>

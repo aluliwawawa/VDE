@@ -1,0 +1,19 @@
+# Node
+node_modules/
+miniprogram_npm/
+
+# IDE
+.idea/
+.vscode/
+
+# System
+.DS_Store
+Thumbs.db
+
+# WeChat DevTools
+project.private.config.json
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log* 
