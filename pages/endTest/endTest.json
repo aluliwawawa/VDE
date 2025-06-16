@@ -2,6 +2,7 @@
   "navigationBarTitleText": "测试结果",
   "usingComponents": {
     "t-result": "tdesign-miniprogram/result/result",
-    "t-button": "tdesign-miniprogram/button/button"
+    "t-button": "tdesign-miniprogram/button/button",
+    "t-icon": "tdesign-miniprogram/icon/icon"
   }
 } 

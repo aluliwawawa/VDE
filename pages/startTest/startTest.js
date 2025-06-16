@@ -1,75 +1,105 @@
 // pages/startTest/startTest.js
-const app = getApp()
-const { questions } = require('../../data/questions.js')
+const questions = require('../../data/questions.js')
 
 Page({
   data: {
     currentQuestionIndex: 0,
     questions: [],
-    totalQuestions: 3,
     score: 0,
+    totalQuestions: 0,
+    progressPercentage: 0,
     showDialog: false,
     isCorrect: false,
-    currentAnswer: '',
-    currentExplanation: '',
     currentImage: '',
-    showResult: false
+    strafeTotal: 0,
+    lrTotal: 0,
+    currentAnswer: null,
+    testCompleted: false
   },
 
   onLoad() {
-    this.loadQuestions()
+    console.log('startTest onLoad called')
+    // 随机选择3个问题
+    const shuffledQuestions = [...questions].sort(() => Math.random() - 0.5)
+    const selectedQuestions = shuffledQuestions.slice(0, 3)
+
+    console.log('Selected questions:', selectedQuestions.length)
+
+    this.setData({
+      questions: selectedQuestions,
+      totalQuestions: selectedQuestions.length
+    })
+
+    // 初始化进度
+    this.updateProgress()
   },
 
-  loadQuestions() {
-    // 随机选择3道题目
-    const shuffled = [...questions].sort(() => 0.5 - Math.random())
-    const selected = shuffled.slice(0, this.data.totalQuestions)
+  updateProgress() {
+    const percentage = this.data.totalQuestions > 0
+      ? Math.round(((this.data.currentQuestionIndex + 1) / this.data.totalQuestions) * 100)
+      : 0
+    console.log('Progress update:', {
+      currentQuestionIndex: this.data.currentQuestionIndex,
+      totalQuestions: this.data.totalQuestions,
+      percentage
+    })
     this.setData({
-      questions: selected
+      progressPercentage: percentage
     })
   },
 
-  checkAnswer(e) {
-    const { value } = e.detail
+  handleAnswer(e) {
+    const answer = e.detail.value
     const currentQuestion = this.data.questions[this.data.currentQuestionIndex]
-    const isCorrect = value === currentQuestion.antwortung - 1  // 因为答案是从1开始的，而value是从0开始的
+    const isCorrect = answer === currentQuestion.antwortung - 1
+
+    // 如果答错了，累加罚款和生命危险分数
+    if (!isCorrect) {
+      this.setData({
+        strafeTotal: this.data.strafeTotal + currentQuestion.strafe,
+        lrTotal: this.data.lrTotal + currentQuestion.LR
+      })
+    }
 
     this.setData({
       showDialog: true,
       isCorrect,
-      currentAnswer: currentQuestion.auswahl[value],
-      currentExplanation: currentQuestion.erklaerung,
       currentImage: isCorrect ? '/images/correct.png' : '/images/wrong.png',
-      score: isCorrect ? this.data.score + 1 : this.data.score
+      currentAnswer: answer
     })
+
+    if (isCorrect) {
+      this.setData({
+        score: this.data.score + 1
+      })
+    }
   },
 
   closeDialog() {
     this.setData({
-      showDialog: false
+      showDialog: false,
+      currentAnswer: null,
+      currentImage: ''
     })
-
-    // 检查是否是最后一题
-    if (this.data.currentQuestionIndex === this.data.totalQuestions - 1) {
-      // 保存测试记录
-      const records = wx.getStorageSync('testRecords') || []
-      const now = new Date()
-      const date = `${now.getMonth() + 1}-${now.getDate()} ${now.getHours()}:${now.getMinutes()}`
-      records.push({
-        date: date,
-        score: this.data.score
-      })
-      wx.setStorageSync('testRecords', records)
-
-      // 跳转到结果页
-      wx.redirectTo({
-        url: `/pages/endTest/endTest?score=${this.data.score}&total=${this.data.totalQuestions}`
-      })
-    } else {
-      // 进入下一题
+    
+    if (this.data.currentQuestionIndex < this.data.totalQuestions - 1) {
       this.setData({
         currentQuestionIndex: this.data.currentQuestionIndex + 1
       })
+      this.updateProgress()
+    } else {
+      // 测试结束，跳转到结果页面
+      this.setData({
+        testCompleted: true
+      })
+      const url = `/pages/endTest/endTest?score=${this.data.score}&total=${this.data.totalQuestions}&strafeTotal=${this.data.strafeTotal}&lrTotal=${this.data.lrTotal}`
+      console.log('Redirecting to:', url) // 添加日志
+      wx.redirectTo({ url })
     }
+  },
+
+  viewScore() {
+    const url = `/pages/endTest/endTest?score=${this.data.score}&total=${this.data.totalQuestions}&strafeTotal=${this.data.strafeTotal}&lrTotal=${this.data.lrTotal}`
+    wx.redirectTo({ url })
   }
 })

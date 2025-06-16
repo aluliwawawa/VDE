@@ -6,21 +6,24 @@
 }
 
 .progress-container {
+  width: 100%;
   margin-bottom: 32rpx;
-  padding: 0 16rpx;
+  background-color: #fff;
+  border-radius: 12rpx;
+  padding: 24rpx;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.05);
 }
 
 .progress {
   margin-bottom: 32rpx;
 }
 
-.progress-text {
-  font-size: 28rpx;
-  color: var(--td-text-color-secondary);
-  margin-top: 16rpx;
+/* 进度条样式 - 只设置容器宽度，不影响进度显示 */
+.progress-container t-progress {
+  width: 100%;
   display: block;
-  text-align: center;
 }
+
 
 .question-container {
   background-color: #fff;
@@ -51,8 +54,8 @@
   justify-content: center;
 }
 
-.question-image {
-  width: 100%;
+.image-container image {
+  max-width: 100%;
   max-height: 400rpx;
   border-radius: 8rpx;
 }
@@ -121,33 +124,7 @@
   border: none;
 }
 
-/* 自定义对话框样式 */
-.custom-dialog {
-  --td-dialog-width: 80%;
-}
-
-.custom-dialog .t-dialog__content {
-  text-align: center;
-  padding: 32rpx;
-  font-size: var(--td-font-size-m);
-  color: var(--td-text-color-secondary);
-}
-
-.custom-dialog .t-dialog__title {
-  font-size: var(--td-font-size-xl);
-  font-weight: 600;
-  text-align: center;
-  margin-bottom: 32rpx;
-}
-
-.custom-dialog .t-dialog__btn {
-  margin-top: 48rpx;
-}
-
-.custom-dialog .t-dialog__btn .t-button {
-  width: 240rpx;
-  margin: 0 auto;
-}
+/* 对话框图片样式 */
 
 .dialog-image {
   width: 240rpx;
@@ -155,9 +132,4 @@
   margin: 32rpx auto;
   display: block;
   border-radius: 8rpx;
-}
-
-/* 对话框样式 */
-:host {
-  --td-dialog-border-radius: 16rpx;
 }

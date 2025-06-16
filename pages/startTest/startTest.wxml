@@ -1,23 +1,27 @@
 <!--pages/startTest/startTest.wxml-->
 <view class="container">
   <view class="progress-container">
-    <t-progress theme="plump" percentage="{{(currentQuestionIndex / totalQuestions) * 100}}" />
+    <t-progress
+      theme="plump"
+      percentage="{{progressPercentage}}"
+    />
+    <view class="progress-text">{{currentQuestionIndex}}/{{totalQuestions}}</view>
   </view>
 
-  <view class="question-container">
+  <view class="question-container" wx:if="{{questions[currentQuestionIndex]}}">
     <view class="question-number">问题 {{currentQuestionIndex + 1}}/{{totalQuestions}}</view>
     <view class="question-text">{{questions[currentQuestionIndex].frage}}</view>
-    
+
     <view class="image-container" wx:if="{{questions[currentQuestionIndex].image}}">
       <image src="{{questions[currentQuestionIndex].image}}" mode="aspectFit" class="question-image" />
     </view>
 
     <view class="options-container">
-      <t-radio-group value="{{selectedAnswer}}" bind:change="checkAnswer">
-        <t-radio wx:for="{{questions[currentQuestionIndex].auswahl}}" 
-                wx:key="index" 
-                value="{{index}}" 
-                label="{{item}}" 
+      <t-radio-group value="{{currentAnswer}}" bind:change="handleAnswer">
+        <t-radio wx:for="{{questions[currentQuestionIndex].auswahl}}"
+                wx:key="index"
+                value="{{index}}"
+                label="{{item}}"
                 block />
       </t-radio-group>
     </view>
@@ -26,12 +30,12 @@
   <t-dialog
     visible="{{showDialog}}"
     title="{{isCorrect ? '回答正确！' : '回答错误'}}"
-    content="{{currentExplanation}}"
+    content="{{questions[currentQuestionIndex] ? questions[currentQuestionIndex].erklaerung : ''}}"
     confirm-btn="{{ {content: '继续', variant: 'base' } }}"
     bind:confirm="closeDialog"
     theme="{{isCorrect ? 'success' : 'error'}}"
   >
-    <t-image slot="top" t-class="dialog-image" src="{{currentImage}}" />
+    <image slot="top" class="dialog-image" src="{{currentImage}}" mode="aspectFit" />
   </t-dialog>
 
   <view class="completion" wx:if="{{testCompleted}}">
