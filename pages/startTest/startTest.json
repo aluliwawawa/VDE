@@ -1,3 +1,13 @@
 {
-  "usingComponents": {}
+  "navigationBarTitleText": "开始测试",
+  "usingComponents": {
+    "t-progress": "tdesign-miniprogram/progress/progress",
+    "t-radio": "tdesign-miniprogram/radio/radio",
+    "t-radio-group": "tdesign-miniprogram/radio-group/radio-group",
+    "t-button": "tdesign-miniprogram/button/button",
+    "t-result": "tdesign-miniprogram/result/result",
+    "t-dialog": "tdesign-miniprogram/dialog/dialog",
+    "t-image": "tdesign-miniprogram/image/image",
+    "t-tag": "tdesign-miniprogram/tag/tag"
+  }
 }

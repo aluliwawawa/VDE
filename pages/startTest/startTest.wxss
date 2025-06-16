@@ -1,26 +1,163 @@
 /* pages/startTest/startTest.wxss */
 .container {
-  padding: 20px;
+  padding: 32rpx;
+  min-height: 100vh;
+  background-color: #f5f5f5;
+}
+
+.progress-container {
+  margin-bottom: 32rpx;
+  padding: 0 16rpx;
+}
+
+.progress {
+  margin-bottom: 32rpx;
+}
+
+.progress-text {
+  font-size: 28rpx;
+  color: var(--td-text-color-secondary);
+  margin-top: 16rpx;
+  display: block;
+  text-align: center;
+}
+
+.question-container {
+  background-color: #fff;
+  border-radius: 16rpx;
+  padding: 32rpx;
+  margin-bottom: 32rpx;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.1);
+}
+
+.question-number {
+  font-size: 28rpx;
+  color: #666;
+  margin-bottom: 16rpx;
+}
+
+.question-text {
+  font-size: 36rpx;
+  color: #333;
+  font-weight: 500;
+  margin-bottom: 32rpx;
+  line-height: 1.5;
+}
+
+.image-container {
+  width: 100%;
+  margin: 32rpx 0;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+}
+
+.question-image {
+  width: 100%;
+  max-height: 400rpx;
+  border-radius: 8rpx;
+}
+
+.options-container {
+  margin-top: 32rpx;
+}
+
+.options {
+  margin-bottom: 32rpx;
+}
+
+.t-radio {
+  margin-bottom: 24rpx;
+}
+
+.t-radio__label {
+  font-size: var(--td-font-size-m);
+  color: var(--td-text-color-primary);
+}
+
+.correct {
+  color: var(--td-success-color);
+}
+
+.wrong {
+  color: var(--td-error-color);
+}
+
+.category {
+  margin-bottom: 32rpx;
+  text-align: center;
+}
+
+.navigation {
+  display: flex;
+  gap: 16rpx;
+  margin-top: auto;
+}
+
+.navigation .t-button {
+  flex: 1;
+}
+
+.completion {
+  flex: 1;
+  display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh;
 }
-.question {
-  font-size: 18px;
+
+.result {
+  width: 100%;
+}
+
+.completion-text {
+  font-size: 24px;
   margin-bottom: 20px;
 }
-.options {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+
+.view-score-btn {
+  background-color: #0052d9;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 4px;
+  border: none;
 }
-.options button {
-  margin: 5px;
-  width: 40px;
-  height: 40px;
-  line-height: 40px;
+
+/* 自定义对话框样式 */
+.custom-dialog {
+  --td-dialog-width: 80%;
+}
+
+.custom-dialog .t-dialog__content {
   text-align: center;
-  font-size: 16px;
+  padding: 32rpx;
+  font-size: var(--td-font-size-m);
+  color: var(--td-text-color-secondary);
+}
+
+.custom-dialog .t-dialog__title {
+  font-size: var(--td-font-size-xl);
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 32rpx;
+}
+
+.custom-dialog .t-dialog__btn {
+  margin-top: 48rpx;
+}
+
+.custom-dialog .t-dialog__btn .t-button {
+  width: 240rpx;
+  margin: 0 auto;
+}
+
+.dialog-image {
+  width: 240rpx;
+  height: 240rpx;
+  margin: 32rpx auto;
+  display: block;
+  border-radius: 8rpx;
+}
+
+/* 对话框样式 */
+:host {
+  --td-dialog-border-radius: 16rpx;
 }

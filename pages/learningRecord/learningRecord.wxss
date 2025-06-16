@@ -1,6 +1,6 @@
 /* pages/learningRecord/learningRecord.wxss */
 .container {
-  padding: 20px;
+  padding: 32rpx;
 }
 .user-info {
   display: flex;
@@ -25,10 +25,33 @@
   font-weight: bold;
   margin-bottom: 10px;
 }
+.record-list {
+  width: 100%;
+}
 .record-item {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 5px;
+  align-items: center;
+  padding: 24rpx;
+  margin-bottom: 16rpx;
+  background-color: #fff;
+  border-radius: 8rpx;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.1);
+}
+.record-date {
+  color: #333;
+  font-size: 28rpx;
+}
+.record-score {
+  color: #0052d9;
+  font-size: 28rpx;
+  font-weight: 500;
+}
+.no-record {
+  text-align: center;
+  color: #999;
+  font-size: 28rpx;
+  padding: 48rpx 0;
 }
 .share-btn {
   margin-top: 20px;

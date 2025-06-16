@@ -1,0 +1,17 @@
+<view class="container">
+  <view class="result">
+    <t-result
+      theme="{{resultLevel === 3 ? 'success' : resultLevel === 2 ? 'warning' : resultLevel === 1 ? 'warning' : 'error'}}"
+      title="{{resultText}}"
+      description="{{resultLevel === 3 ? '太棒了！' : resultLevel === 2 ? '还不错！' : resultLevel === 1 ? '继续加油！' : '需要更多练习！'}}"
+      t-class="result"
+      icon=""
+    >
+      <image slot="image" src="{{resultImage}}" class="result-image" mode="aspectFit" />
+      <view slot="action" class="button-group">
+        <t-button theme="primary" size="large" bind:tap="restartTest">重新测试</t-button>
+        <t-button theme="default" size="large" bind:tap="backToHome">返回首页</t-button>
+      </view>
+    </t-result>
+  </view>
+</view> 

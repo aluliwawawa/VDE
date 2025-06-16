@@ -1,18 +1,20 @@
 <!--pages/learningRecord/learningRecord.wxml-->
 <view class="container">
   <view class="user-info">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+    <t-button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo">获取头像昵称</t-button>
     <block wx:else>
-      <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+      <t-image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="aspectFill" shape="round" />
       <text class="userinfo-nickname">{{userInfo.nickName}}</text>
     </block>
   </view>
-  <view class="test-records">
-    <text class="title">最近答题记录</text>
-    <view wx:for="{{testRecords}}" wx:key="date" class="record-item">
-      <text>日期：{{item.date}}</text>
-      <text>得分：{{item.score}}</text>
+  <view class="record-list">
+    <view class="record-item" wx:for="{{records}}" wx:key="index">
+      <view class="record-date">{{item.date}}</view>
+      <view class="record-score">答对 {{item.score * 33}}%</view>
+    </view>
+    <view class="no-record" wx:if="{{records.length === 0}}">
+      暂无答题记录
     </view>
   </view>
-  <button class="share-btn" bindtap="shareRecord">分享答题记录</button>
+  <t-button class="share-btn" bindtap="shareRecord">分享</t-button>
 </view>

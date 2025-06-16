@@ -3,12 +3,13 @@
     "pages/index/index",
     "pages/startTest/startTest",
     "pages/basicKnowledge/basicKnowledge",
-    "pages/learningRecord/learningRecord"
+    "pages/learningRecord/learningRecord",
+    "pages/endTest/endTest"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#ffffff",
-    "navigationBarTitleText": "微信小程序",
+    "navigationBarTitleText": "德国交规",
     "navigationBarTextStyle": "black"
   },
   "renderer": "webview",
@@ -37,7 +38,12 @@
     "t-button": "tdesign-miniprogram/button/button",
     "t-icon": "tdesign-miniprogram/icon/icon",
     "t-tab-bar": "tdesign-miniprogram/tab-bar/tab-bar",
-    "t-tab-bar-item": "tdesign-miniprogram/tab-bar-item/tab-bar-item"
+    "t-tab-bar-item": "tdesign-miniprogram/tab-bar-item/tab-bar-item",
+    "t-progress": "tdesign-miniprogram/progress/progress",
+    "t-radio": "tdesign-miniprogram/radio/radio",
+    "t-radio-group": "tdesign-miniprogram/radio-group/radio-group",
+    "t-tag": "tdesign-miniprogram/tag/tag",
+    "t-result": "tdesign-miniprogram/result/result"
   },
   "sitemapLocation": "sitemap.json"
 }

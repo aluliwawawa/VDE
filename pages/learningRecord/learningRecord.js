@@ -1,49 +1,67 @@
 // pages/learningRecord/learningRecord.js
+const app = getApp()
+
 Page({
   data: {
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    testRecords: [
-      { date: '2023-05-01', score: 9 },
-      { date: '2023-05-03', score: 12 },
-      { date: '2023-05-05', score: 15 }
-    ]
+    canIUseGetUserProfile: false,
+    canIUseOpenData: wx.canIUse('open-data.type.userAvatarUrl') && wx.canIUse('open-data.type.userNickName'),
+    records: []
   },
-  onLoad: function (options) {
-    if (app.globalData.userInfo) {
+  onLoad() {
+    if (wx.getUserProfile) {
       this.setData({
-        userInfo: app.globalData.userInfo,
-        hasUserInfo: true
+        canIUseGetUserProfile: true
       })
-    } else if (this.data.canIUse) {
-      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-      // 所以此处加入 callback 以防止这种情况
-      app.userInfoReadyCallback = res => {
+    }
+    this.loadRecords()
+  },
+  onShow() {
+    this.loadRecords()
+  },
+  getUserProfile(e) {
+    wx.getUserProfile({
+      desc: '展示用户信息',
+      success: (res) => {
         this.setData({
           userInfo: res.userInfo,
           hasUserInfo: true
         })
       }
-    } else {
-      // 在没有 open-type=getUserInfo 版本的兼容处理
-      wx.getUserInfo({
-        success: res => {
-          app.globalData.userInfo = res.userInfo
-          this.setData({
-            userInfo: res.userInfo,
-            hasUserInfo: true
-          })
-        }
-      })
-    }
+    })
   },
-  getUserInfo: function (e) {
-    console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
+  getUserInfo(e) {
     this.setData({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
+    })
+  },
+  loadRecords() {
+    const records = wx.getStorageSync('testRecords') || []
+    // 只保留最近5条记录
+    const recentRecords = records.slice(-5)
+    this.setData({
+      records: recentRecords
+    })
+  },
+  clearRecords() {
+    wx.showModal({
+      title: '确认清除',
+      content: '确定要清除所有学习记录吗？',
+      success: (res) => {
+        if (res.confirm) {
+          wx.removeStorageSync('testRecords')
+          this.setData({
+            records: []
+          })
+          wx.showToast({
+            title: '记录已清除',
+            icon: 'success'
+          })
+        }
+      }
     })
   },
   shareRecord: function () {

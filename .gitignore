@@ -16,4 +16,7 @@ project.private.config.json
 # Logs
 npm-debug.log*
 yarn-debug.log*
-yarn-error.log* 
+yarn-error.log*
+
+# 忽略 images 目录下的所有内容
+/images/ 

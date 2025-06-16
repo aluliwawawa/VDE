@@ -1,13 +1,49 @@
 <!--pages/startTest/startTest.wxml-->
 <view class="container">
-  <view wx:if="{{!testCompleted}}">
-    <text class="question">{{questions[currentQuestionIndex].question}}</text>
-    <view class="options">
-      <button wx:for="{{[1,2,3,4,5]}}" wx:key="*this" data-answer="{{item}}" bindtap="checkAnswer">{{item}}</button>
+  <view class="progress-container">
+    <t-progress theme="plump" percentage="{{(currentQuestionIndex / totalQuestions) * 100}}" />
+  </view>
+
+  <view class="question-container">
+    <view class="question-number">问题 {{currentQuestionIndex + 1}}/{{totalQuestions}}</view>
+    <view class="question-text">{{questions[currentQuestionIndex].frage}}</view>
+    
+    <view class="image-container" wx:if="{{questions[currentQuestionIndex].image}}">
+      <image src="{{questions[currentQuestionIndex].image}}" mode="aspectFit" class="question-image" />
+    </view>
+
+    <view class="options-container">
+      <t-radio-group value="{{selectedAnswer}}" bind:change="checkAnswer">
+        <t-radio wx:for="{{questions[currentQuestionIndex].auswahl}}" 
+                wx:key="index" 
+                value="{{index}}" 
+                label="{{item}}" 
+                block />
+      </t-radio-group>
     </view>
   </view>
-  <view wx:else>
-    <text>测试完成！</text>
-    <button bindtap="viewScore">查看得分</button>
+
+  <t-dialog
+    visible="{{showDialog}}"
+    title="{{isCorrect ? '回答正确！' : '回答错误'}}"
+    content="{{currentExplanation}}"
+    confirm-btn="{{ {content: '继续', variant: 'base' } }}"
+    bind:confirm="closeDialog"
+    theme="{{isCorrect ? 'success' : 'error'}}"
+  >
+    <t-image slot="top" t-class="dialog-image" src="{{currentImage}}" />
+  </t-dialog>
+
+  <view class="completion" wx:if="{{testCompleted}}">
+    <t-result
+      theme="{{score >= totalQuestions * 0.6 ? 'success' : 'warning'}}"
+      title="{{score >= totalQuestions * 0.6 ? '恭喜通过！' : '继续加油！'}}"
+      description="测试已完成"
+      t-class="result"
+    >
+      <view slot="action">
+        <t-button theme="primary" size="large" bind:tap="viewScore">查看得分</t-button>
+      </view>
+    </t-result>
   </view>
 </view>

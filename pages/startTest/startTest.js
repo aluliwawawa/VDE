@@ -1,54 +1,75 @@
 // pages/startTest/startTest.js
+const app = getApp()
+const { questions } = require('../../data/questions.js')
+
 Page({
   data: {
-    questions: [],
     currentQuestionIndex: 0,
+    questions: [],
+    totalQuestions: 3,
     score: 0,
-    totalQuestions: 15,
-    testCompleted: false
+    showDialog: false,
+    isCorrect: false,
+    currentAnswer: '',
+    currentExplanation: '',
+    currentImage: '',
+    showResult: false
   },
-  onLoad: function (options) {
+
+  onLoad() {
     this.loadQuestions()
   },
-  loadQuestions: function () {
-    // 这里应该从后端API获取题目，为了演示，我们使用模拟数据
-    const mockQuestions = [
-      { id: 1, question: "1+1=?", answer: 2 },
-      { id: 2, question: "2+2=?", answer: 4 },
-      // ... 添加更多题目，直到15个
-    ]
+
+  loadQuestions() {
+    // 随机选择3道题目
+    const shuffled = [...questions].sort(() => 0.5 - Math.random())
+    const selected = shuffled.slice(0, this.data.totalQuestions)
     this.setData({
-      questions: mockQuestions
+      questions: selected
     })
   },
-  checkAnswer: function (e) {
-    const userAnswer = parseInt(e.currentTarget.dataset.answer)
-    const correctAnswer = this.data.questions[this.data.currentQuestionIndex].answer
-    if (userAnswer === correctAnswer) {
-      this.setData({
-        score: this.data.score + 1
+
+  checkAnswer(e) {
+    const { value } = e.detail
+    const currentQuestion = this.data.questions[this.data.currentQuestionIndex]
+    const isCorrect = value === currentQuestion.antwortung - 1  // 因为答案是从1开始的，而value是从0开始的
+
+    this.setData({
+      showDialog: true,
+      isCorrect,
+      currentAnswer: currentQuestion.auswahl[value],
+      currentExplanation: currentQuestion.erklaerung,
+      currentImage: isCorrect ? '/images/correct.png' : '/images/wrong.png',
+      score: isCorrect ? this.data.score + 1 : this.data.score
+    })
+  },
+
+  closeDialog() {
+    this.setData({
+      showDialog: false
+    })
+
+    // 检查是否是最后一题
+    if (this.data.currentQuestionIndex === this.data.totalQuestions - 1) {
+      // 保存测试记录
+      const records = wx.getStorageSync('testRecords') || []
+      const now = new Date()
+      const date = `${now.getMonth() + 1}-${now.getDate()} ${now.getHours()}:${now.getMinutes()}`
+      records.push({
+        date: date,
+        score: this.data.score
       })
-    }
-    if (this.data.currentQuestionIndex < this.data.totalQuestions - 1) {
+      wx.setStorageSync('testRecords', records)
+
+      // 跳转到结果页
+      wx.redirectTo({
+        url: `/pages/endTest/endTest?score=${this.data.score}&total=${this.data.totalQuestions}`
+      })
+    } else {
+      // 进入下一题
       this.setData({
         currentQuestionIndex: this.data.currentQuestionIndex + 1
       })
-    } else {
-      this.setData({
-        testCompleted: true
-      })
     }
-  },
-  viewScore: function () {
-    wx.showModal({
-      title: '得分',
-      content: `您的得分是：${this.data.score}/${this.data.totalQuestions}`,
-      showCancel: false,
-      success (res) {
-        if (res.confirm) {
-          wx.navigateBack()
-        }
-      }
-    })
   }
 })
