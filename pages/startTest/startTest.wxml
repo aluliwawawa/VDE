@@ -1,30 +1,30 @@
 <!--pages/startTest/startTest.wxml-->
 <view class="container">
-  <view class="progress-container">
-    <t-progress
-      theme="plump"
-      percentage="{{progressPercentage}}"
-    />
-    <view class="progress-text">{{currentQuestionIndex}}/{{totalQuestions}}</view>
-  </view>
+  <!-- 第一个白色容器：进度条 + 问题 + 图片 -->
+  <view class="content-container" wx:if="{{questions[currentQuestionIndex]}}">
+    <view class="progress-container">
+      <t-progress
+        theme="plump"
+        percentage="{{progressPercentage}}"
+      />
+    </view>
 
-  <view class="question-container" wx:if="{{questions[currentQuestionIndex]}}">
-    <view class="question-number">问题 {{currentQuestionIndex + 1}}/{{totalQuestions}}</view>
     <view class="question-text">{{questions[currentQuestionIndex].frage}}</view>
 
     <view class="image-container" wx:if="{{questions[currentQuestionIndex].image}}">
       <image src="{{questions[currentQuestionIndex].image}}" mode="aspectFit" class="question-image" />
     </view>
+  </view>
 
-    <view class="options-container">
-      <t-radio-group value="{{currentAnswer}}" bind:change="handleAnswer">
-        <t-radio wx:for="{{questions[currentQuestionIndex].auswahl}}"
-                wx:key="index"
-                value="{{index}}"
-                label="{{item}}"
-                block />
-      </t-radio-group>
-    </view>
+  <!-- 第二个白色容器：所有选项 -->
+  <view class="options-container" wx:if="{{questions[currentQuestionIndex]}}">
+    <t-radio-group value="{{currentAnswer}}" bind:change="handleAnswer">
+      <t-radio wx:for="{{questions[currentQuestionIndex].auswahl}}"
+              wx:key="index"
+              value="{{index}}"
+              label="{{item}}"
+              block />
+    </t-radio-group>
   </view>
 
   <t-dialog

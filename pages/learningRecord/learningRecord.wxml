@@ -1,9 +1,9 @@
 <!--pages/learningRecord/learningRecord.wxml-->
 <view class="container">
   <view class="user-info">
-    <t-button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo">获取头像昵称</t-button>
+    <t-button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bind:getuserinfo="getUserInfo">获取头像昵称</t-button>
     <block wx:else>
-      <t-image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="aspectFill" shape="round" />
+      <t-image t-class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="aspectFill" shape="round" />
       <text class="userinfo-nickname">{{userInfo.nickName}}</text>
     </block>
   </view>
@@ -16,5 +16,5 @@
       暂无答题记录
     </view>
   </view>
-  <t-button class="share-btn" bindtap="shareRecord">分享</t-button>
+  <t-button t-class="share-btn" bind:tap="shareRecord">分享</t-button>
 </view>

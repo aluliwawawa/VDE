@@ -1,55 +1,49 @@
 /* pages/startTest/startTest.wxss */
 .container {
-  padding: 32rpx;
+  padding: 0 !important;
   min-height: 100vh;
   background-color: #f5f5f5;
+  display: block !important;
+  align-items: unset !important;
+  justify-content: unset !important;
+  height: auto !important;
+  box-sizing: border-box !important;
+}
+
+/* 第一个白色容器：进度条 + 问题 + 图片 */
+.content-container {
+  background-color: #fff;
+  border-radius: 0;
+  padding: 32rpx 0 32rpx 0;
+  margin: 0 0 8rpx 0;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.1);
+  width: 100%;
 }
 
 .progress-container {
   width: 100%;
-  margin-bottom: 32rpx;
-  background-color: #fff;
-  border-radius: 12rpx;
-  padding: 24rpx;
-  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.05);
+  margin-bottom: 50rpx;
+  padding: 0 32rpx;
+  box-sizing: border-box;
 }
 
-.progress {
-  margin-bottom: 32rpx;
-}
-
-/* 进度条样式 - 只设置容器宽度，不影响进度显示 */
 .progress-container t-progress {
   width: 100%;
   display: block;
-}
-
-
-.question-container {
-  background-color: #fff;
-  border-radius: 16rpx;
-  padding: 32rpx;
-  margin-bottom: 32rpx;
-  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.1);
-}
-
-.question-number {
-  font-size: 28rpx;
-  color: #666;
-  margin-bottom: 16rpx;
 }
 
 .question-text {
   font-size: 36rpx;
   color: #333;
   font-weight: 500;
-  margin-bottom: 32rpx;
+  margin-bottom: 16rpx;
   line-height: 1.5;
+  padding: 0 32rpx;
 }
 
 .image-container {
   width: 100%;
-  margin: 32rpx 0;
+  margin: 16rpx 0 24rpx 0;
   display: flex;
   justify-content: center;
 }
@@ -60,68 +54,18 @@
   border-radius: 8rpx;
 }
 
+/* 第二个白色容器：所有选项 */
 .options-container {
-  margin-top: 32rpx;
-}
-
-.options {
-  margin-bottom: 32rpx;
-}
-
-.t-radio {
-  margin-bottom: 24rpx;
-}
-
-.t-radio__label {
-  font-size: var(--td-font-size-m);
-  color: var(--td-text-color-primary);
-}
-
-.correct {
-  color: var(--td-success-color);
-}
-
-.wrong {
-  color: var(--td-error-color);
-}
-
-.category {
-  margin-bottom: 32rpx;
-  text-align: center;
-}
-
-.navigation {
-  display: flex;
-  gap: 16rpx;
-  margin-top: auto;
-}
-
-.navigation .t-button {
-  flex: 1;
-}
-
-.completion {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.result {
+  background-color: #fff;
+  border-radius: 0;
+  padding: 16rpx 0 32rpx 0;
+  margin: 0;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.1);
   width: 100%;
 }
 
-.completion-text {
-  font-size: 24px;
-  margin-bottom: 20px;
-}
-
-.view-score-btn {
-  background-color: #0052d9;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 4px;
-  border: none;
+.options-container .t-radio-group {
+  padding: 32rpx 32rpx 0 32rpx;
 }
 
 /* 对话框图片样式 */
