@@ -1,26 +1,20 @@
-<view class="container">
-  <view class="result">
-    <t-result
-      theme="{{resultLevel === 3 ? 'success' : resultLevel === 0 ? 'error' : 'warning'}}"
-      title="测试完成"
-      description="{{resultText}}"
-    />
+<view class="result-header">
+  <text class="result-title">测试完成</text>
+</view>
 
-    <view class="result-details">
-      <view class="score-info">
-        <text class="score-text">得分：{{score}}/{{total}}</text>
-      </view>
-      <view class="detail-item">
-        <text class="detail-text">罚款情况：{{strafeText}} ({{strafeTotal}}分)</text>
-      </view>
-      <view class="detail-item">
-        <text class="detail-text">安全情况：{{lrText}} ({{lrTotal}}分)</text>
-      </view>
-    </view>
-
-    <view class="button-group">
-      <t-button theme="primary" block bind:tap="restartTest">重新测试</t-button>
-      <t-button theme="default" block bind:tap="backToHome">返回首页</t-button>
-    </view>
+<view class="result-details">
+  <view class="score-info">
+    <text class="score-text">得分：{{score}}/{{total}}</text>
   </view>
-</view> 
+  <view class="detail-item">
+    <text class="detail-text">{{strafeText}}</text>
+  </view>
+  <view class="detail-item">
+    <text class="detail-text">{{lrText}}</text>
+  </view>
+</view>
+
+<view class="button-group">
+  <t-button theme="primary" block bind:tap="restartTest">重新测试</t-button>
+  <t-button theme="default" block bind:tap="backToHome">返回首页</t-button>
+</view>

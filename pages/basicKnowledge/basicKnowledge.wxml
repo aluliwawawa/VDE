@@ -1,4 +1,5 @@
 <!--pages/basicKnowledge/basicKnowledge.wxml-->
 <view class="container">
-  <text>基础知识页面（待完善）</text>
+  <text>基础知识页面（待完善没搞好！）</text>
+  <text>别看！</text>
 </view>

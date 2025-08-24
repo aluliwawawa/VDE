@@ -9,6 +9,6 @@
       block
       bind:tap="startTest"
       t-class="start-btn"
-    >开始答题</t-button>
+    >现在开始答题</t-button>
   </view>
 </view>

@@ -37,17 +37,4 @@
   >
     <image slot="top" class="dialog-image" src="{{currentImage}}" mode="aspectFit" />
   </t-dialog>
-
-  <view class="completion" wx:if="{{testCompleted}}">
-    <t-result
-      theme="{{score >= totalQuestions * 0.6 ? 'success' : 'warning'}}"
-      title="{{score >= totalQuestions * 0.6 ? '恭喜通过！' : '继续加油！'}}"
-      description="测试已完成"
-      t-class="result"
-    >
-      <view slot="action">
-        <t-button theme="primary" size="large" bind:tap="viewScore">查看得分</t-button>
-      </view>
-    </t-result>
-  </view>
 </view>

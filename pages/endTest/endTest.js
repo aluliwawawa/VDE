@@ -29,20 +29,20 @@ Page({
 
     // 计算罚款等级
     if (strafeTotal >= 10) {
-      strafeText = '罚好多钱'
+      strafeText = '兄弟，你这样开车会被罚好多钱'
     } else if (strafeTotal > 3) {
-      strafeText = '罚一点钱'
+      strafeText = '兄弟要多准备点钱交罚单'
     } else {
-      strafeText = '不会罚款'
+      strafeText = '恭喜你省了一大笔罚款钱'
     }
 
     // 计算生命危险等级
     if (lrTotal >= 10) {
-      lrText = '生命危险'
+      lrText = '然后，哥们你可能回不来了'
     } else if (lrTotal > 3) {
-      lrText = '可能受伤'
+      lrText = '然后，哥们这次是准备去德国医院一轮游么？'
     } else {
-      lrText = '比较安全'
+      lrText = '还有，总体不错，小心驾驶'
     }
 
     // 计算总体等级
